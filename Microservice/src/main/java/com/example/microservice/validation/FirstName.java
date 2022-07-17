@@ -1,4 +1,4 @@
-package com.example.employee.validation;
+package com.example.microservice.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -17,4 +17,3 @@ public @interface FirstName {
 
     Class<? extends Payload>[] payload() default {};
 }
-
