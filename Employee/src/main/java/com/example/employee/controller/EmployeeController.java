@@ -17,13 +17,13 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @PostMapping("/register")
+    @PostMapping("/")
     public ResponseEntity<Employee> register(EmployeeInformation employeeInformation){
         return ResponseEntity.ok().body(employeeService.save(employeeInformation));
     }
 
-    @GetMapping("/findEmployee")
-    public ResponseEntity<Employee> findEmployee(Long id) {
+    @GetMapping("/")
+    public ResponseEntity<Employee> findEmployee(@RequestParam Long id) {
         return ResponseEntity.ok().body(employeeService.findById(id));
     }
 }
