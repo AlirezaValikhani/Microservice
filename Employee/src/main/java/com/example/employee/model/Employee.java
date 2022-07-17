@@ -17,7 +17,6 @@ import javax.persistence.Entity;
 public class Employee extends Base<Long> {
     @Column(nullable = false)
     private String firstName;
-    @Column()
     private String lastName;
     private String email;
 }
