@@ -6,7 +6,7 @@ import com.example.microservice.repository.CustomerRepository;
 import com.example.microservice.service.CustomerService;
 import org.springframework.stereotype.Repository;
 
-@Repository
+@Service
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
 
