@@ -14,4 +14,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> invalidNameException(Exception ex, WebRequest request) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please enter valid name");
     }
+
+    @ExceptionHandler(NotFoundEmployeeException.class)
+    public ResponseEntity<Object> notFoundEmployeeException(Exception ex, WebRequest request) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Employee not found!!!");
+    }
 }

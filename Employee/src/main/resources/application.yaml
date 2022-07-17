@@ -1,11 +1,9 @@
 server:
   port: 8080
-  servlet:
-    context-path: /docker-pass-env-var-to-container
 
 spring:
   application:
-    name: customer
+    name: Employee
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
