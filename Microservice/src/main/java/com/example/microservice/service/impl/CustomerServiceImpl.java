@@ -1,5 +1,6 @@
 package com.example.microservice.service.impl;
 
+import com.example.microservice.dto.CustomerInformation;
 import com.example.microservice.model.Customer;
 import com.example.microservice.repository.CustomerRepository;
 import com.example.microservice.service.CustomerService;
@@ -14,7 +15,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer save(Customer customer) {
+    public Customer save(CustomerInformation customerInformation) {
+        Customer customer = new Customer(customerInformation.getFirstName(),customerInformation.getLastName(),customerInformation.getEmail());
         return customerRepository.save(customer);
     }
 
