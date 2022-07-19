@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.redis.core.RedisHash;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.Entity;
 @Getter
 @Setter
 @Entity
+@RedisHash("Employee")
 public class Employee extends Base<Long> {
     @Column(nullable = false)
     private String firstName;
