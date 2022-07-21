@@ -2,13 +2,13 @@ package com.example.employee.service;
 
 import com.example.employee.dto.EmployeeInformation;
 import com.example.employee.model.Employee;
-import org.springframework.http.ResponseEntity;
 
-import java.util.Optional;
+import java.util.List;
+import java.util.Map;
 
 public interface EmployeeService {
-
     Employee save(EmployeeInformation employeeInformation);
-
+    List<Employee> findAll();
     Employee findById(Long id);
+    String delete(Long id);
 }

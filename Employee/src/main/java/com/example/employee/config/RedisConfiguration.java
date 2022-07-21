@@ -1,36 +1,34 @@
 package com.example.employee.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
-import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
+//import org.springframework.context.annotation.Configuration;
+//import redis.clients.jedis.JedisPool;
+//
+//@Configuration
+//public class RedisConfiguration {
+//
+//
+//    public JedisPool jedisPool() {
+//        return new JedisPool();
+//    }
+//}
+import com.example.employee.model.Employee;
+        import org.springframework.boot.autoconfigure.SpringBootApplication;
+        import org.springframework.context.annotation.Bean;
+        import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+        import org.springframework.data.redis.core.RedisTemplate;
 
-@Configuration
-@EnableRedisRepositories
+@SpringBootApplication
 public class RedisConfiguration {
 
     @Bean
-    public JedisConnectionFactory connectionFactory() {
-        RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
-        configuration.setHostName("localhost");
-        configuration.setPort(6379);
-        return new JedisConnectionFactory(configuration);
+    JedisConnectionFactory jedisConnectionFactory(){
+        return new JedisConnectionFactory();
     }
 
     @Bean
-    public RedisTemplate<String, Object> redisTemplate() {
-        RedisTemplate<String, Object> template = new RedisTemplate<>();
-        template.setConnectionFactory(connectionFactory());
-        template.setKeySerializer(new StringRedisSerializer());
-        template.setHashKeySerializer(new StringRedisSerializer());
-        template.setHashKeySerializer(new JdkSerializationRedisSerializer());
-        template.setValueSerializer(new JdkSerializationRedisSerializer());
-        template.setEnableTransactionSupport(true);
-        template.afterPropertiesSet();
-        return template;
+    RedisTemplate<String, Employee> redisTemplate(){
+        RedisTemplate<String,Employee> redisTemplate = new RedisTemplate<String, Employee>();
+        redisTemplate.setConnectionFactory(jedisConnectionFactory());
+        return redisTemplate;
     }
 }

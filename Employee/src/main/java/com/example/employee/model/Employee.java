@@ -17,6 +17,9 @@ import javax.persistence.Entity;
 @Entity
 @RedisHash("Employee")
 public class Employee extends Base<Long> {
+
+
+
     @Column(nullable = false)
     private String firstName;
     private String lastName;

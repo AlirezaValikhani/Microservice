@@ -6,7 +6,8 @@ import com.example.employee.service.impl.EmployeeServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/employee")
@@ -23,7 +24,17 @@ public class EmployeeController {
     }
 
     @GetMapping("/")
+    public ResponseEntity<List<Employee>> findAll() {
+        return ResponseEntity.ok().body(employeeService.findAll());
+    }
+
+    @GetMapping("/")
     public ResponseEntity<Employee> findEmployee(@RequestParam Long id) {
         return ResponseEntity.ok().body(employeeService.findById(id));
+    }
+
+    @DeleteMapping("/")
+    public ResponseEntity<String> delete(@RequestParam Long id) {
+        return ResponseEntity.ok().body(employeeService.delete(id));
     }
 }
