@@ -2,15 +2,17 @@ package com.example.microservice.service.impl;
 
 import com.example.microservice.dto.CustomerInformation;
 import com.example.microservice.model.Customer;
-import com.example.microservice.repository.JedisCommonRepository;
+import com.example.microservice.repository.CustomerRepositoryImpl;
 import com.example.microservice.service.CustomerService;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class CustomerServiceImpl implements CustomerService {
-    private final JedisCommonRepository customerRepository;
+    private final CustomerRepositoryImpl customerRepository;
 
-    public CustomerServiceImpl(JedisCommonRepository customerRepository) {
+    public CustomerServiceImpl(CustomerRepositoryImpl customerRepository) {
         this.customerRepository = customerRepository;
     }
 
@@ -21,7 +23,17 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer loadById(Long id) {
-        return customerRepository.loadById(id);
+    public Customer loadById(String email) {
+        return customerRepository.findById(email);
+    }
+
+    @Override
+    public List<Customer> findAll() {
+        return customerRepository.findAll();
+    }
+
+    @Override
+    public String delete(String email) {
+        return customerRepository.delete(email);
     }
 }
