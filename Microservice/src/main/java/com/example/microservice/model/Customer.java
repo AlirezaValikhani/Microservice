@@ -12,7 +12,6 @@ import javax.persistence.Column;
 @Getter
 @Setter
 public class Customer {
-    @Column(nullable = false)
     private String firstName;
     private String lastName;
     private String email;

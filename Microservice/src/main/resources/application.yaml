@@ -2,23 +2,17 @@ server:
   port: 8081
 
 spring:
-#  application:
-#    name: customer
-#  datasource:
-#    url: jdbc:postgresql://localhost:5432/postgres
-#    username: postgres
-#    password: 1234
-#  jpa:
-#    hibernate:
-#      ddl-auto: update
-#    properties:
-#      hibernate:
-#        format_sql: true
-#        dialect: org.hibernate.dialect.PostgreSQLDialect
-#        show_sql: true
-  redis:
-    database: 0
-    host: localhost
-    port: 16379
+  application:
+    name: customer
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
     password: 1234
-    timeout: 60000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: true

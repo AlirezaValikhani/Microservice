@@ -6,7 +6,6 @@ import redis.clients.jedis.JedisPool;
 
 import java.util.Map;
 
-@Component
 public class JedisCommonRepository {
     private final JedisPool jedisPool;
 
