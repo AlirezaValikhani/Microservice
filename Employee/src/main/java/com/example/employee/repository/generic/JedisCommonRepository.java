@@ -30,9 +30,9 @@ public class JedisCommonRepository {
         }
     }
 
-    public void del(String key) {
+    public void del(String group, String key) {
         try (Jedis jedis = jedisPool.getResource()) {
-            jedis.del(key);
+            jedis.hdel(group, key);
         }
     }
 }

@@ -28,8 +28,13 @@ public class EmployeeController {
     }
 
     @GetMapping("/{email}")
-    public ResponseEntity<Employee> findEmployee(@PathVariable @RequestParam String email) {
+    public ResponseEntity<Employee> findByEmail(@PathVariable @RequestParam String email) {
         return ResponseEntity.ok().body(employeeService.findById(email));
+    }
+
+    @PutMapping("/")
+    public ResponseEntity<String> update(@RequestBody EmployeeInformation employeeInformation) {
+        return ResponseEntity.ok().body(employeeService.update(employeeInformation));
     }
 
     @DeleteMapping("/")

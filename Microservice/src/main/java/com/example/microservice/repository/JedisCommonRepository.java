@@ -15,7 +15,7 @@ public class JedisCommonRepository {
 
     public void set(String group,String key , String input){
         try(Jedis jedis = jedisPool.getResource()){
-            jedis.hset(group,key,input);
+            jedis.hset(group, key, input);
         }
     }
 
@@ -31,9 +31,9 @@ public class JedisCommonRepository {
         }
     }
 
-    public void del(String key) {
+    public void del(String group,String key) {
         try (Jedis jedis = jedisPool.getResource()) {
-            jedis.del(key);
+            jedis.hdel(group, key);
         }
     }
 }

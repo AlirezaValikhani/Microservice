@@ -11,4 +11,5 @@ public interface EmployeeService {
     List<Employee> findAll();
     Employee findById(String id);
     String delete(String id);
+    String update(EmployeeInformation employeeInformation);
 }

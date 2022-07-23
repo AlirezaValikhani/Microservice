@@ -36,4 +36,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public String delete(String id) {
         return employeeRepository.delete(id);
     }
+
+    @Override
+    public String update(EmployeeInformation employeeInformation) {
+        Employee employee = new Employee(employeeInformation.getFirstName(),employeeInformation.getLastName(),employeeInformation.getEmail());
+        return employeeRepository.update(employee);
+    }
 }

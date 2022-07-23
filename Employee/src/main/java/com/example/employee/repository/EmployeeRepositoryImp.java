@@ -41,11 +41,12 @@ public class EmployeeRepositoryImp {
     }
 
     public String delete(String key) {
-        jedisCommonRepository.del(key);
-        return "Deleted successfully";
+        jedisCommonRepository.del(HASH_KEY, key);
+        return "Employee deleted successfully";
     }
 
-    public void update(Employee employee) {
+    public String update(Employee employee) {
         save(employee);
+        return "Employee updated successfully";
     }
 }

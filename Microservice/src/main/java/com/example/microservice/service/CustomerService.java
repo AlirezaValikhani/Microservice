@@ -10,4 +10,5 @@ public interface CustomerService {
     Customer loadById(String email);
     List<Customer> findAll();
     String delete(String email);
+    String update(CustomerInformation customerInformation);
 }

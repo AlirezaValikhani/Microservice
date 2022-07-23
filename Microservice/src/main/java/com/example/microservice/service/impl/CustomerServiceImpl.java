@@ -36,4 +36,10 @@ public class CustomerServiceImpl implements CustomerService {
     public String delete(String email) {
         return customerRepository.delete(email);
     }
+
+    @Override
+    public String update(CustomerInformation customerInformation) {
+        Customer customer = new Customer(customerInformation.getFirstName(),customerInformation.getLastName(),customerInformation.getEmail());
+        return customerRepository.update(customer);
+    }
 }

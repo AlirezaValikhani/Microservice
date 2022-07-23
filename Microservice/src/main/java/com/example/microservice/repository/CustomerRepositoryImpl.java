@@ -40,11 +40,12 @@ public class CustomerRepositoryImpl {
     }
 
     public String delete(String key) {
-        jedisCommonRepository.del(key);
-        return "Deleted successfully";
+        jedisCommonRepository.del(HASH_KEY,key);
+        return "Customer deleted successfully";
     }
 
-    public void update(Customer customer) {
+    public String update(Customer customer) {
         save(customer);
+        return "Customer updated successfully";
     }
 }

@@ -18,7 +18,7 @@ public class CustomerController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Customer> register(CustomerInformation customerInformation){
+    public ResponseEntity<Customer> register(@RequestBody CustomerInformation customerInformation){
         return ResponseEntity.ok().body(customerService.save(customerInformation));
     }
 
@@ -35,5 +35,10 @@ public class CustomerController {
     @DeleteMapping("/")
     public ResponseEntity<String> delete(@RequestParam String email) {
         return ResponseEntity.ok().body(customerService.delete(email));
+    }
+
+    @PutMapping("/")
+    public ResponseEntity<String> update(@RequestBody CustomerInformation customerInformation) {
+        return ResponseEntity.ok().body(customerService.update(customerInformation));
     }
 }
