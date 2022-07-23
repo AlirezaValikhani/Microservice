@@ -9,6 +9,6 @@ import java.util.Map;
 public interface EmployeeService {
     Employee save(EmployeeInformation employeeInformation);
     List<Employee> findAll();
-    Employee findById(Long id);
-    String delete(Long id);
+    Employee findById(String id);
+    String delete(String id);
 }

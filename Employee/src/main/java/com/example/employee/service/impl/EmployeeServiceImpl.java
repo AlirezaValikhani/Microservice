@@ -5,9 +5,7 @@ import com.example.employee.model.Employee;
 import com.example.employee.repository.EmployeeRepositoryImp;
 import com.example.employee.service.EmployeeService;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -30,13 +28,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee findById(Long id) {
+    public Employee findById(String id) {
         return employeeRepository.findById(id);
     }
 
     @Override
-    public String delete(Long id) {
-
+    public String delete(String id) {
         return employeeRepository.delete(id);
     }
 }

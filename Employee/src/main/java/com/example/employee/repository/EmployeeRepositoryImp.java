@@ -1,39 +1,49 @@
 package com.example.employee.repository;
 
 import com.example.employee.model.Employee;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Repository;
+import com.example.employee.repository.generic.JedisCommonRepository;
+import com.google.gson.Gson;
+import org.springframework.stereotype.Component;
+import redis.clients.jedis.JedisPool;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-@Repository
+
+@Component
 public class EmployeeRepositoryImp {
-    private RedisTemplate<String,Employee> redisTemplate;
-    private HashOperations hashOperations;
+    private final JedisCommonRepository employeeRepository;
     private static final String HASH_KEY = "Employee";
 
-    public EmployeeRepositoryImp( RedisTemplate<String, Employee> redisTemplate, HashOperations hashOperations) {
-        this.redisTemplate = redisTemplate;
-        this.hashOperations = hashOperations;
+    public EmployeeRepositoryImp() throws URISyntaxException {
+        JedisPool pool = new JedisPool(new URI("redis://default:sOmE_sEcUrE_pAsS@127.0.0.1:6379"));
+        this.employeeRepository = new JedisCommonRepository(pool);
     }
 
-    public Employee save(Employee employee){
-        hashOperations.putIfAbsent(HASH_KEY,employee.getEmail(),employee);
+    public Employee save(Employee employee) {
+        String jsonEm = new Gson().toJson(employee);
+        employeeRepository.set(HASH_KEY, employee.getEmail(), jsonEm);
         return employee;
     }
 
     public List<Employee> findAll(){
-        return hashOperations.values(HASH_KEY);
+        Map<String , String> map = employeeRepository.getAll(HASH_KEY);
+        return map.entrySet().stream().sorted(Map.Entry.comparingByValue())
+                .map(e -> new Employee(e.getKey(), e.getValue())).collect(Collectors.toList());
     }
 
 
-    public Employee findById(Long id){
-        return (Employee) hashOperations.get(HASH_KEY,id);
+    public Employee findById(String email) {
+        String json = employeeRepository.get(HASH_KEY, email);
+        return new Gson().fromJson(json, Employee.class);
     }
 
-    public String delete(Long id){
-        hashOperations.delete(HASH_KEY,id);
+    public String delete(String key) {
+        employeeRepository.del(key);
         return "Deleted successfully";
     }
 
