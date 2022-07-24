@@ -2,6 +2,8 @@ server:
   port: 8080
 
 spring:
+  rabbitmq:
+    addresses: localhost:5672
   application:
     name: Employee
   datasource:
