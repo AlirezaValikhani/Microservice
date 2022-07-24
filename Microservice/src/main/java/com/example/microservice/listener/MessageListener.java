@@ -6,6 +6,7 @@ import com.example.microservice.messageClass.CustomMessage;
 import com.example.microservice.model.Customer;
 import com.example.microservice.service.impl.CustomerServiceImpl;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,8 +18,10 @@ public class MessageListener {
     }
 
     @RabbitListener(queues = MQConfiguration.QUEUE)
-    public void Listener(CustomerInformation customerInformation) {
+    @SendTo
+    public String Listener(CustomerInformation customerInformation) {
         Customer customer = customerService.save(customerInformation);
         System.out.println(customer.getFirstName());
+        return "OK";
     }
 }

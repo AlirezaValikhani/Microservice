@@ -51,8 +51,8 @@ public class EmployeeController {
 
     @PostMapping("/newCustomer")
     public ResponseEntity<String> createCustomer(@RequestBody CustomerInformation customerInformation) {
-        rabbitTemplate.convertAndSend(MQConfiguration.EXCHANGE,
-                MQConfiguration.ROUTING_KEY,customerInformation);
-        return ResponseEntity.ok("Message published");
+        String result = (String) rabbitTemplate.convertSendAndReceive(MQConfiguration.EXCHANGE,
+                MQConfiguration.ROUTING_KEY, customerInformation);
+        return ResponseEntity.ok(result);
     }
 }
